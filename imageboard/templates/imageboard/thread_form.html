@@ -1,0 +1,10 @@
+{% extends 'imageboard/base.html' %}
+{% block content %}
+<form class="formerino" enctype="multipart/form-data" method="post">
+  <h2>New thread</h2>
+  {% csrf_token %}
+  {{ form.as_p }}
+  <br>
+  <input type="submit" value="Post">
+</form>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'imageboard/base.html' %}
+{% block content %}
+<div class="thread">
+  <h2>{{ thread.subject }}</h2>
+  <div class="thread-meta">
+    <span class="thread-name">
+      <b>{{ thread.name }}</b>
+    </span>
+    <span class="thread-date">
+      <time datetime="{{ thread.date_created }}" class="post-date">{{ thread.date_created }}</time>
+    </span>
+    {% if thread.session_key == request.session.session_key %}
+    <span>
+      [<a href="{% url 'edit-thread' thread.pk %}">Edit</a>]
+    </span>
+    <span>
+      <form id="delete-thread" action="{% url 'delete-thread' thread.pk %}" method="POST">
+        {% csrf_token %}
+        [<input class="not-link" type="submit" value="Delete" onclick="return confirm('Are you sure?');">]
+      </form>
+    </span>
+    {% endif %}
+  </div>
+  <div class="thread-content">
+    {% if thread.image %}
+      <div class="thread-image">
+        <a href="{{ thread.image.url }}" target="_blank">
+          <img src="{{ thread.image.url }}" style="max-height: 512px;">
+        </a>
+      </div>
+    {% endif %}
+    {% if thread.comment %}
+      <p>{{ thread.comment }}</p>
+    {% endif %}
+  </div>
+</div>
+
+<form class="formerino" method="post">
+  <h2>Reply</h2>
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="Reply">
+</form>
+
+{% for reply in thread.reply_set.all %}
+<div class="reply">
+  <span class="reply-meta">
+    <span class="thread-name"><b>{{ reply.name }}</b></span>
+    <span class="thread-date"><time datetime="{{ reply.date_created }}" class="post-date">{{ reply.date_created }}</time></span>
+    {% if reply.session_key == request.session.session_key %}
+    <span>
+      [<a href="{% url 'edit-reply' thread.pk reply.pk %}">Edit</a>]
+    </span>
+    <span>
+      <form id="delete-thread" action="{% url 'delete-reply' thread.pk reply.pk %}" method="POST">
+        {% csrf_token %}
+        [<input class="not-link" type="submit" value="Delete" onclick="return confirm('Are you sure?');">]
+      </form>
+    </span>
+    {% endif %}
+  </span>
+  <div class="reply-content">
+    {{ reply.comment }}
+  </div>
+</div>
+{% endfor %}
+{% endblock %}

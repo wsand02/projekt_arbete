@@ -1,0 +1,164 @@
+:root {
+  --color0: #492540;
+  --color1: #c03546;
+  --color1hover: #b85345;
+  --color2: #f26d5b;
+  --color3: #f6ea8c;
+}
+
+body {
+  font-family: sans-serif;
+  background-color: #f8f8f8;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+ul.errorlist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+input, label {
+  display: block;
+}
+
+nav {
+  display: flex;
+  padding: 1rem;
+  background-color: var(--color2);
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14);
+}
+
+nav .nav-right {
+  margin-left: 0.7rem;
+  display: flex;
+}
+
+nav a {
+  margin-right: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color:  var(--color1);
+  color: azure;
+  text-decoration: none;
+}
+
+nav .logo {
+  color: azure;
+}
+
+nav a:hover {
+  background-color: var(--color1hover);
+  color: var(--color3);
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 700px!important;
+}
+
+#content {
+  margin-top: 1rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0px;
+}
+
+.thread {
+  border-radius: 5px;
+  padding: 1rem;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
+  margin-bottom: 0.5rem;
+  background-color: white;
+}
+
+.formerino {
+  border-radius: 5px;
+  padding: 1rem;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
+  margin-bottom: 0.5rem;
+  background-color: white;
+}
+
+.thread h2 {
+  margin: 0;
+}
+
+.thread,
+.thread-title a {
+  color: #202020;
+}
+
+.thread-meta {
+  margin-top: 5px;
+}
+
+.thread-meta span {
+  margin: 1px;
+}
+
+.thread-image {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.thread-image img {
+  display: block;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
+}
+
+a {
+  color: var(--color1);
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  color: var(--color1hover);
+  text-decoration: underline;
+}
+
+.reply {
+  border-radius: 5px;
+  padding: 1rem;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
+  margin-bottom: 0.5rem;
+  background-color: white;
+}
+
+.reply-content {
+  margin-top: 5px;
+}
+
+.paginator {
+  padding: 10px;
+}
+
+input[type=submit].not-link {
+  border: none;
+  background: none;
+  display: inline;
+  color: var(--color1);
+  padding: 0;
+  text-decoration: none;
+}
+
+input[type=submit].not-link:hover,
+input[type=submit].not-link:focus {
+  color: var(--color1hover);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#delete-thread {
+  display: inline;
+}

@@ -1,0 +1,65 @@
+{% extends 'imageboard/base.html' %}
+{% block content %}
+  {% if page_obj %}
+  {% for thread in page_obj %}
+    <div class="thread">
+      <h2 class="thread-title"><a href="{{ thread.get_absolute_url }}">{{ thread.subject }}</a></h2>
+      <div class="thread-meta">
+        <span class="thread-name">
+          <b>{{ thread.name }}</b>
+        </span>
+        <span class="thread-date">
+          <time datetime="{{ thread.date_created }}" class="post-date">{{ thread.date_created }}</time>
+        </span>
+        {% if thread.session_key == request.session.session_key %}
+        <span>
+          [<a href="{% url 'edit-thread' thread.pk %}">Edit</a>]
+        </span>
+        <span>
+          <form id="delete-thread" action="{% url 'delete-thread' thread.pk %}" method="POST">
+            {% csrf_token %}
+            [<input class="not-link" type="submit" value="Delete" onclick="return confirm('Are you sure?');">]
+          </form>
+        </span>
+        {% endif %}
+        <span>
+          [<a href="{{ thread.get_absolute_url }}">Reply</a>]
+        </span>
+      </div>
+      <div class="thread-content">
+        {% if thread.image %}
+          <div class="thread-image">
+            <a href="{{ thread.image.url }}" target="_blank">
+              <img src="{{ thread.image.url }}" style="max-height: 512px;">
+            </a>
+          </div>
+        {% endif %}
+        {% if thread.comment %}
+          <p>{{ thread.comment|truncatechars:250 }} {% if thread.comment|length >= 250 %}<a href="{{ thread.get_absolute_url }}">Read more</a>{% endif %}</p>
+        {% endif %}
+      </div>
+      <div class="thread-meta-2">
+        <span class="thread-replies">Replies: {{ thread.reply_set.all|length }}</span>
+      </div>
+    </div>
+    {% endfor %}
+    <div class="paginator">
+      <span class="step-links">
+        {% if page_obj.has_previous %}
+          <a href="?page=1">First</a>
+          <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+        <span class="current">
+          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+        {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}">Next</a>
+          <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+        {% endif %}
+      </span>
+    </div>
+  {% else %}
+    <h1>No threads.</h1>
+    <p>Create <a href="{% url 'new-thread' %}">one</a>.</p>
+  {% endif %}
+{% endblock %}

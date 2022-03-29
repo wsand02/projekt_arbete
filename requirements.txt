@@ -1,0 +1,7 @@
+asgiref==3.5.0
+Django==4.0.3
+django-recaptcha==3.0.0
+Pillow==9.0.1
+shortuuid==1.0.8
+sqlparse==0.4.2
+tzdata==2022.1

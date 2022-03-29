@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>projekt_arbete</title>
+  <link rel="stylesheet" href="{% static 'imageboard/css/vendor/normalize.css' %}">
+  <link rel="stylesheet" href="{% static 'imageboard/css/style.css' %}">
+</head>
+<body>
+  <nav>
+    <div class="logo">projekt_arbete</div>
+    <div class="nav-right">
+      <div class="nav-item"><a href="{% url 'home' %}">Home</a></div>
+      <div class="nav-item"><a href="{% url 'new-thread' %}">New Thread</a></div>
+    </div>
+  </nav>
+  <div id="content" class="container">
+  {% block content %}{% endblock %}
+  </div>
+</body>
+</html>
